@@ -1,0 +1,46 @@
+﻿@using Camp.ViewModels
+@model IndexViewModel
+
+<div class="container">
+    <div class="row g-5">
+        <form method="get" class="col-md-10">
+            <div class="row g-3 align-items-center">
+                <div class="col-md-3">
+                    <label>Фамилия: </label>
+                    <input name="lastName" value="@Model.FilterViewModel.SelectedLastName" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <label>Телефон: </label>
+                    <input name="phoneNumber" placeholder="+7(___) ___-____" id="ContactPhone" value="@Model.FilterViewModel.SelectedPhoneNumber" class="form-control ContactPhone" />
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="processed" value="true" @(Model.FilterViewModel.SelectedProcessed ? "checked" : "") id="processed">
+                        <label class="form-check-label" for="processed">Обработаный заказ</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <input type="submit" value="Фильтр" class="btn btn-outline-dark" />
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="EditModal">
+
+    </div>
+    @await Html.PartialAsync("PartialView/_TableOrders", Model)
+
+    @await Html.PartialAsync("PartialView/_Pagination", Model)
+
+</div>
+
+@section Scripts{ 
+    <script src="~/js/EditOrder.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".ContactPhone").click(function () {
+                $(this).setCursorPosition(3);
+            }).mask("+7(999) 999-9999");
+        });
+    </script>
+}

@@ -1,0 +1,27 @@
+﻿@model Camp.Models.LoginModel
+
+<form asp-action="Login" asp-controller="Account" asp-anti-forgery="true">
+    <h1 class="h3 mb-3 fw-normal">Вход</h1>
+    <div class="validation" asp-validation-summary="ModelOnly"></div>
+    <div>
+        <label asp-for="Email" class="visually-hidden">Введите Email</label>
+        <input type="email" asp-for="Email" class="form-control" placeholder="Email" required autofocus />
+        <span asp-validation-for="Email" />
+        <label asp-for="Password" class="visually-hidden">Введите пароль</label>
+        <input asp-for="Password" class="form-control" placeholder="Password" required />
+        <span asp-validation-for="Password" />
+        <div class="form-group">
+            <input type="submit" value="Войти" class="w-100 btn btn-lg btn-primary" />
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            $("body").addClass("text-center");
+            $("main").addClass("form-signin");
+            $("html").css({ "height": "100%" });
+        });
+    </script>
+}

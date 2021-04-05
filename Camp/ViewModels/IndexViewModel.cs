@@ -1,0 +1,15 @@
+﻿using Camp.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Camp.ViewModels
+{
+    public class IndexViewModel
+    {
+        public IEnumerable<Order> Orders { get; set; }
+        public FilterViewModel FilterViewModel { get; set; }
+        public PageViewModel PageViewModel { get; set; }
+    }
+}

@@ -1,0 +1,63 @@
+﻿@using Camp.Models
+@using Camp.ViewModels
+@model OrderIndexViewModel   
+
+<div class="container" style="max-width: 960px;">
+    <div id="OrderForm" class="row g-5">
+        <form asp-controller="Order" asp-action="Index" onsubmit="return PostOrder(this)" class="col-md-7 col-lg-8">
+            <h4 class="mb-3">Заполните данные</h4>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="FirstName" class="form-label">Имя</label>
+                    <input type="text" class="form-control" name="FirstName" value="" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="LastName" class="form-label">Фамилия</label>
+                    <input type="text" class="form-control" name="LastName" value="" required>
+                </div>
+                <div class="col-md-12">
+                    <label for="ContactPhone" class="form-label">Номер телефона</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="inputGroupPrepend2">+7</span>
+                        <input id="ContactPhone" type="text" placeholder="(___) ___-____" class="form-control" name="ContactPhone" aria-describedby="inputGroupPrepend2" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="TourId" class="form-label">Смена</label>
+                    <select id="tourSelect" onchange="return GetCardInfoView();" class="form-select" name="TourId" required>
+                        @foreach (var tour in Model.Tours)
+                        {
+                            <option value="@tour.TourId">@tour.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="VoucherId" class="form-label">Путевка</label>
+                    <select id="voucherSelect" onchange="return GetCardInfoView();" class="form-select" name="VoucherId" required>
+                        @foreach (var voucher in Model.Vouchers)
+                        {
+                            <option value="@voucher.VoucherId">@voucher.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <hr class="my-4">
+            <button class="w-100 btn btn-primary btn-lg" type="submit">Оставить заявку</button>
+        </form>
+        <div id="CardInfo" class="col-md-5 col-lg-4 order-md-last">
+            @*AJAX partial view: _CardInfoOrder*@
+        </div>
+    </div>
+    <div id="StatusOrder">
+        
+    </div>
+</div>
+
+@section Scripts{ 
+    <script type="text/javascript" src="~/js/CardInfo.js"></script>
+    <script type="text/javascript">
+        $("#ContactPhone").click(function () {
+            $(this).setCursorPosition(1);
+        }).mask("(999) 999-9999");
+    </script>
+}

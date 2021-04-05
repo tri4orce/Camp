@@ -1,0 +1,45 @@
+﻿@using Camp.ViewModels
+@model IndexViewModel
+
+<table class="table table table-striped table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Телефон</th>
+            <th scope="col">Смена</th>
+            <th scope="col">Путевка</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var o in Model.Orders)
+        {
+            <tr>
+                <th scope="row">@o.OrderId</th>
+                <td>@o.FirstName</td>
+                <td>@o.LastName</td>
+                <td>@o.ContactPhone</td>
+                <td>@o.Tour.Name</td>
+                <td>@o.Voucher.Name</td>
+                <td>
+                    <form asp-controller="Admin" asp-action="Edit" onsubmit="return GetEditOrder(@o.OrderId);" method="get">
+                        <input type="submit" value="Изменить" class="btn btn-primary" />
+                    </form>
+                </td>
+                <td>
+                    <form asp-controller="Admin" asp-action="Delete" method="post"
+                          asp-route-page="@(Model.PageViewModel.PageNumber)"
+                          asp-route-lastName="@(Model.FilterViewModel.SelectedLastName)"
+                          asp-route-phoneNumber="@(Model.FilterViewModel.SelectedPhoneNumber)"
+                          asp-route-processed="@(Model.FilterViewModel.SelectedProcessed)">
+                        <input type="hidden" name="id" value="@o.OrderId" />
+                        <input type="submit" class="btn btn-danger" value="Удалить" />
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

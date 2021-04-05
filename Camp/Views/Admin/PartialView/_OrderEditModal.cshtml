@@ -1,0 +1,63 @@
+﻿@using Camp.ViewModels
+@model EditOrderViewModel
+
+<div class="modal fade" id="OrderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Изменить</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-controller="Admin" asp-action="Edit" onsubmit="//return PostEditOrder(this)" class="col-md-12">
+                    <input type="hidden" asp-for="Order.OrderId" value="@Model.Order.OrderId" />
+                    <h4 class="mb-3">Заполните данные</h4>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="FirstName" class="form-label">Имя</label>
+                            <input type="text" class="form-control" asp-for="Order.FirstName" value="@Model.Order.FirstName" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="LastName" class="form-label">Фамилия</label>
+                            <input type="text" class="form-control" asp-for="Order.LastName" value="@Model.Order.LastName" required>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="ContactPhone" class="form-label">Номер телефона</label>
+                            <div class="input-group">
+                                <input id="ContactPhone" type="text" placeholder="+7(___) ___-____" class="form-control ContactPhone" asp-for="Order.ContactPhone" value="@Model.Order.ContactPhone" aria-describedby="inputGroupPrepend2" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="TourId" class="form-label">Смена</label>
+                            <select id="tourSelect" class="form-select" asp-for="Order.TourId" required>
+                                @foreach (var tour in Model.Tours)
+                                {
+                                    <option value="@tour.TourId">@tour.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="VoucherId" class="form-label">Путевка</label>
+                            <select id="voucherSelect" class="form-select" asp-for="Order.VoucherId" required>
+                                @foreach (var voucher in Model.Vouchers)
+                                {
+                                    <option value="@voucher.VoucherId">@voucher.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" asp-for="Order.Processed" value="true" id="Processed">
+                                <label class="form-check-label" for="Processed">Обработаный заказ</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer mt-3">
+                        <button type="submit" class="btn btn-primary">Изменить</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

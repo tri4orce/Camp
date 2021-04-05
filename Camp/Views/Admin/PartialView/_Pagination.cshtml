@@ -1,0 +1,54 @@
+﻿@using Camp.ViewModels
+@model IndexViewModel
+
+    <nav aria-label="...">
+        <ul class="pagination">
+            @if (Model.PageViewModel.HasPreviousPage)
+            {
+                <li class="page-item">
+                    <a asp-action="Index"
+                       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+                       asp-route-lastName="@(Model.FilterViewModel.SelectedLastName)"
+                       asp-route-phoneNumber="@(Model.FilterViewModel.SelectedPhoneNumber)"
+                       asp-route-processed="@(Model.FilterViewModel.SelectedProcessed)"
+                       class="page-link" tabindex="-1" aria-disabled="false">Назад</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1" aria-disabled="true">Назад</a>
+                </li>
+            }
+
+            @for (int i = 1; i <= Model.PageViewModel.TotalPages; i++)
+            {
+                <li class="@(Model.PageViewModel.PageNumber == i ? "page-item active" : "page-item")">
+                    <a asp-action="Index"
+                       asp-route-page="@i"
+                       asp-route-lastName="@(Model.FilterViewModel.SelectedLastName)"
+                       asp-route-phoneNumber="@(Model.FilterViewModel.SelectedPhoneNumber)"
+                       asp-route-processed="@(Model.FilterViewModel.SelectedProcessed)"
+                       class="page-link">@i</a>
+                </li>
+            }
+
+            @if (Model.PageViewModel.HasNextPage)
+            {
+                <li class="page-item">
+                <a asp-action="Index"
+                   asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+                   asp-route-lastName="@(Model.FilterViewModel.SelectedLastName)"
+                   asp-route-phoneNumber="@(Model.FilterViewModel.SelectedPhoneNumber)"
+                   asp-route-processed="@(Model.FilterViewModel.SelectedProcessed)"
+                   class="page-link" tabindex="-1" aria-disabled="false">Вперед</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1" aria-disabled="true">Вперед</a>
+                </li>
+            }
+        </ul>
+    </nav>

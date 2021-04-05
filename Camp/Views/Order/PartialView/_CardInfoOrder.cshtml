@@ -1,0 +1,18 @@
+﻿@using Camp.ViewModels
+@model CardInfoOrderViewModel
+
+
+    <div class="mt-5 card text-dark bg-light mb-3" style="max-width: 18rem;">
+        <div class="card-header my-visually-hidden">@Model.Voucher.Name</div>
+        <div class="card-body">
+                <h5 class="card-title">@Model.Tour.Name смена</h5>
+                <p class="">Начало смены: @Model.Tour.StartDate.ToString("d")</p>
+                <p class="">Осталось <b>@Model.Tour.CountOfPlace</b> мест</p>
+                <p class="">@Model.Voucher.CountOfDay дней пребывания</p>
+                <p class="card-text"><b>В путевку входит: </b>@Model.Voucher.ServiceList</p>
+                <li class="@("voucher" + @Model.Voucher.VoucherId) list-group-item d-flex justify-content-between">
+                    <span>Стоимость</span>
+                    <strong>@Model.Voucher.Price.ToString("# руб.")</strong>
+                </li>
+        </div>
+    </div>
